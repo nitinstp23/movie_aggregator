@@ -12,7 +12,6 @@ class Aggregator < Thor
     # class variables
     @@instance = nil
 
-    # accessors
     attr_reader :level
     private_class_method :new
 
@@ -36,7 +35,7 @@ class Aggregator < Thor
 
     # initialize the one and only instance
     def initialize
-      @logger = Logger.new(Aggregator::Constants::CONFIG[:log_file])
+      @logger = Logger.new(Aggregator::Constants::SETTINGS['log_file'])
     end
 
     def log(priority, msg)

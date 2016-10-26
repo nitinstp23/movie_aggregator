@@ -2,7 +2,7 @@ class Aggregator < Thor
   module Errors
 
     class BaseError < StandardError
-      attr_accessor :code, :message
+      attr_accessor :message
 
       def initialize(attributes = {})
         attributes.each do |name, value|
@@ -11,8 +11,6 @@ class Aggregator < Thor
       end
     end
 
-    class InvalidExportFormat < BaseError
-    end
-
+    class ExtractError < BaseError; end
   end
 end

@@ -11,4 +11,4 @@ require 'bundler'
 Bundler.setup
 
 require 'aggregator'
-Aggregator.start
+Aggregator.start(ARGV)

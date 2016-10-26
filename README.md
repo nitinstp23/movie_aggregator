@@ -24,5 +24,5 @@ A console based app that accepts movie details as command line args and exports 
 * `sudo touch /var/log/movie_aggregator.log`
 * `sudo chmod 0666 /var/log/movie_aggregator.log`
 * `chmod +x movie_aggregator`
-* `./movie_aggregator export`
+* Run `./movie_aggregator` to get list of available commands
 * Check logs - `tail -f /var/log/movie_aggregator.log`
