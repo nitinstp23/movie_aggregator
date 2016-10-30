@@ -1,31 +1,25 @@
-require_relative 'pdf/source_file'
+require 'prawn'
 
 class Aggregator < Thor
   module Formats
-    class Pdf < Thor
+    class Pdf < Base
       include Extractable
 
-      desc 'extract', 'Extract movie details to pdf'
-      option :name, type: :string, required: true
-      option :time, type: :string, required: true
-      option :lang, type: :string, required: true
-      option :actor, type: :string, required: true
-      option :genre, type: :string, required: true
-      def extract
+      private
+
+      def append(data_string)
         log = Aggregator::Log.instance
-        log.info('START PDF extract')
+        log.info("Writing to a #{name} file")
 
-        data_string = ::Aggregator::MovieDetail.new(options).to_s
-
-        Pdf::SourceFile.new(data_string).append
-
-        log.info('STOP PDF extract')
-      rescue ::Aggregator::Errors::ExtractError => ex
-        log.error(ex)
-
-        if options[:debug]
-          log.debug(ex.backtrace.join("\n"))
+        Prawn::Document.generate(file_path) do
+          text data_string
         end
+      rescue => ex # Rescuing from StandardError as Prawn doesn't defines a base error class
+        raise ::Aggregator::Errors::ExtractError.new(message: "Error while writing to #{name} file")
+      end
+
+      def file_path
+        "#{Aggregator::Constants::SETTINGS['exported_file_path']}/#{name}.pdf"
       end
 
     end

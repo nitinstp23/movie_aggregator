@@ -23,6 +23,8 @@ A console based app that accepts movie details as command line args and exports 
 * `bundle install`
 * `sudo touch /var/log/movie_aggregator.log`
 * `sudo chmod 0666 /var/log/movie_aggregator.log`
+* `sudo mkdir /var/log/movie_aggregator/`
+* `sudo chown -R `whoami`:`whoami` /var/log/movie_aggregator/`
 * `chmod +x movie_aggregator`
 * Run `./movie_aggregator` to get list of available commands
 * Check logs - `tail -f /var/log/movie_aggregator.log`

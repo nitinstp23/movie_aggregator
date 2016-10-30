@@ -2,11 +2,13 @@ require 'thor'
 require 'pathname'
 require 'yaml'
 
+require 'aggregator/extensions'
 require 'aggregator/constants'
 require 'aggregator/log'
 require 'aggregator/errors'
 require 'aggregator/movie_detail'
 require 'aggregator/extractable'
+require 'aggregator/formats/base'
 
 Pathname.new('lib/aggregator/formats/').each_child do |path|
   # Couldn't get it to work without this HACK :(
@@ -27,7 +29,7 @@ class Aggregator < Thor
 
       # This is how we demodulize a class in ruby
       # and need not include `active_support` ;)
-      klass_name = klass.name.split('::').last.downcase
+      klass_name = klass.name.demodulize.downcase
 
       desc klass_name, "Extract movie details to #{klass_name} format"
       option :debug, type: :boolean, default: false

@@ -1,2 +1,2 @@
 log_file: '/var/log/movie_aggregator.log'
-exported_filename: 'movie_details'
+exported_file_path: '/var/log/movie_aggregator'
